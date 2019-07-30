@@ -1,5 +1,6 @@
 import serial
 import time
+import csv
 
 ser = serial.Serial("/dev/ttyUSB0", 9600)
 
@@ -11,9 +12,9 @@ signalC = 0
 if(ser.isOpen()):
     while 1:
         if(ser.inWaiting() > 0):
-            aux = ser.read().decode()
-
-            if aux == "\0":
+            aux = ser.read()
+            print(aux)
+            if (aux == '*'):
                 print("signal")
                 print(signalX)
                 print(len(signalX))
@@ -29,15 +30,20 @@ if(ser.isOpen()):
                 
                 print(signalC)
                 signalC = format(signalC, '.10f')
-                print(signalC)
-                byteAr = bytearray(str(signalC), 'utf-8')
 
-                print(byteAr)
-                for byte in byteAr:
-                    print(chr(byte))
-                    ser.write(byte)
+                #ser.write(ord('B'))
                 
+                for i in range(len(signalC)):
+                    print(chr(ord(signalC[i])))
+                    ser.write(ord(signalC[i]))
+
+                with open("test_data.csv","a") as f :
+                    writer = csv.writer(f , delimiter ="," )
+                    writer.writerow([str(signalC)])
+
                 signalX = ""
+                print("debug")
+                print(signalX)
 
             else:
                 signalX += aux
