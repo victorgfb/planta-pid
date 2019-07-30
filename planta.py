@@ -26,8 +26,6 @@ if(ser.isOpen()):
                 C.append(float(signalC))
                 signalC = 1.6016*(10**-7)*X[0] + 6.15632*(10**-7)*X[1] + 1.47847*(10**-7)*X[2] - (2.84662*C[0] + 2.698752*C[1] - 0.852144*C[2])
                 
-                #problemas para truncar o sinal de saida C
-                
                 print(signalC)
                 signalC = format(signalC, '.10f')
 
