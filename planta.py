@@ -1,7 +1,7 @@
 import serial
 import time
 
-ser = serial.Serial("/dev/ttyACM0", 9600)
+ser = serial.Serial("/dev/ttyUSB0", 9600)
 
 X = [0] * 3
 C =  [0] * 3
@@ -12,7 +12,8 @@ if(ser.isOpen()):
     while 1:
         if(ser.inWaiting() > 0):
             aux = ser.read().decode()
-            if aux == "\n" or aux == "\r":
+
+            if aux == "\0":
                 print("signal")
                 print(signalX)
                 print(len(signalX))
@@ -30,6 +31,7 @@ if(ser.isOpen()):
                 signalC = format(signalC, '.10f')
                 print(signalC)
                 byteAr = bytearray(str(signalC), 'utf-8')
+
                 print(byteAr)
                 for byte in byteAr:
                     print(chr(byte))
@@ -37,7 +39,6 @@ if(ser.isOpen()):
                 
                 signalX = ""
 
-                time.sleep(3)
             else:
                 signalX += aux
 
