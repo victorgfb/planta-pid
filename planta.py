@@ -31,11 +31,13 @@ if(ser.isOpen()):
                 print(signalC)
                 signalC = format(signalC, '.10f')
 
-                #ser.write(ord('B'))
-                
+                ser.write('B')
+
                 for i in range(len(signalC)):
-                    print(chr(ord(signalC[i])))
-                    ser.write(ord(signalC[i]))
+                    ser.write(signalC[i])
+                    time.sleep(0.01)
+
+                ser.write('C')
 
                 with open("test_data.csv","a") as f :
                     writer = csv.writer(f , delimiter ="," )
@@ -44,6 +46,7 @@ if(ser.isOpen()):
                 signalX = ""
                 print("debug")
                 print(signalX)
+                print("debug")
 
             else:
                 signalX += aux
