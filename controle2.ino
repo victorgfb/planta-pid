@@ -2,16 +2,21 @@
 String entrada;
 
 char chr;
+float erro[2] = {0,0};
+float x[2] = {0,0};
 
 void setup() {
   Serial.begin(9600);
-  entrada = "0.7";
   enviaDados();
 }
 
 void enviaDados(){
-   for(int i = 0; i < entrada.length(); i++){
-      Serial.write(entrada[i]);
+   x[0] =  1967.74* erro[0] - 1851.25963*erro[1] + 0.723625*x[1];
+   x[1] = x[0];
+
+  String aux = String(x[0]);
+   for(int i = 0; i < aux.length(); i++){
+      Serial.write(aux[i]);
       delay(100);
     }  
     Serial.write('*');
@@ -38,11 +43,15 @@ void recebe(){
         entrada.concat(chr);
       }
    }
+
+  erro[1] = erro[0];
+  erro[0] = 1 - entrada.toFloat();
+   
 }
 
 void loop() {
+  enviaDados();
+  delay(1000);
   esperaRecebimento();
   recebe();
-  delay(1000);
-  enviaDados();
 }

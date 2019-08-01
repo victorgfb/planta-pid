@@ -49,8 +49,6 @@ if(ser.isOpen()):
             else:
                 signalX += aux
 
-
-
 else:
     print("error")
 
