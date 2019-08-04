@@ -3,7 +3,7 @@ String entrada;
 
 char chr;
 float erro[2] = {0,0};
-float x[2] = {0,0};
+float x = 0;
 
 void setup() {
   Serial.begin(9600);
@@ -11,10 +11,9 @@ void setup() {
 }
 
 void enviaDados(){
-   x[0] =  1967.74* erro[0] - 1851.25963*erro[1] + 0.723625*x[1];
-   x[1] = x[0];
+   x =  1967.74* erro[0] - 1851.25963*erro[1] + 0.723625*x;
 
-  String aux = String(x[0]);
+  String aux = String(x);
    for(int i = 0; i < aux.length(); i++){
       Serial.write(aux[i]);
       delay(100);
