@@ -1,6 +1,6 @@
 
-String entrada;
-
+String C;
+int entrada = 1;// degrau
 char chr;
 float erro[2] = {0,0};
 float x = 0;
@@ -33,18 +33,18 @@ void esperaRecebimento(){
 }
 
 void recebe(){
-   entrada = "";
+   C = "";
    while(1){
       if(Serial.available()){
         chr = (char) Serial.read();
         if(chr == 'C')
           break;
-        entrada.concat(chr);
+        C.concat(chr);
       }
    }
 
   erro[1] = erro[0];
-  erro[0] = 1 - entrada.toFloat();
+  erro[0] = entrada - C.toFloat();
    
 }
 
