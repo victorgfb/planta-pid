@@ -50,7 +50,6 @@ void recebe(){
 
 void loop() {
   enviaDados();
-  delay(1000);
   esperaRecebimento();
   recebe();
 }
